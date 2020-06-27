@@ -1,0 +1,26 @@
+<app-header title="Chat en {{restaurant}}"> </app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <div *ngFor="let table of rooms; trackBy: values">
+      <ion-item *ngIf="table.username !== waiter" (click)="enterWaiterChat({id:table.id, user: table.username})">
+        <ion-avatar slot="start">
+          <img src="assets/kaede_avatar.jpg">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{table.username.split("-")[1]}}</h2>
+        </ion-label>
+        <div *ngFor="let msg of messageState">
+          <ion-item slot="end" lines="none" *ngIf="msg === table.username">
+            <ion-chip color="success" disabled>
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <ion-label color="success">Mensaje Nuevo</ion-label>
+            </ion-chip>
+          </ion-item>
+        </div>
+      </ion-item>
+
+    </div>
+  </ion-list>
+
+</ion-content>

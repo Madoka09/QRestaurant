@@ -1,0 +1,191 @@
+<app-header title="{{restaurant}}"></app-header>
+
+<ion-content>
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="assets/avatar_restaurants/{{restaurant}}.png" alt="">
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <h3 class="playername">{{restaurant}}</h3>
+        <h5 *ngIf="!table" class="country">
+          {{address}}
+        </h5>
+        <br *ngIf="!table">
+        <h5 *ngIf="!table" class="country">
+          {{schedule}}
+        </h5>
+        <h5 *ngIf="!table" class="country">
+          {{tel}}
+        </h5>
+        <h5 class="country" *ngIf="table">¡Bienvenido!</h5>
+        <!--
+        <h6 class="ranking" >
+          <ion-chip *ngIf="table" color="success">
+            <ion-icon name="happy-outline"></ion-icon>
+            <ion-label>Tu identificador es: <i>{{restaurant}} - {{table}}</i></ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="waiterMode" color="success">
+            <ion-icon name="happy-outline"></ion-icon>
+            <ion-label>Identificador del Mesero:  <i>{{waiter}}</i></ion-label>
+          </ion-chip>
+        </h6>
+        -->
+      </div>
+      <hr>
+
+      <div *ngIf="waiterMode">
+        <ion-card routerLink="/waiter/{{restaurant}}/chat-index/{{waiter}}">
+          <ion-item lines="none">
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            <ion-label>Lista de Mesas Ocupadas</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+      </div>
+
+      <div *ngIf="table || !table && !waiterMode">
+
+        <ion-card *ngIf="table" (click)="waiterOptions()">
+          <ion-item lines="none">
+            <ion-icon name="happy-outline" slot="start"></ion-icon>
+            <ion-label>Acciones</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+        <hr *ngIf="table">
+
+        <ion-card *ngIf="view === false" (click)="presentAlert()">
+          <ion-item lines="none">
+            <ion-icon name="eye-outline" slot="start"></ion-icon>
+            <ion-label>Ver Menú</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+
+        <ion-card *ngIf="view" (click)="hideMenu()">
+          <ion-item lines="none">
+            <ion-icon name="eye-off-outline" slot="start"></ion-icon>
+            <ion-label>Ocultar Menú</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+
+        <ion-card (click)="download()">
+          <ion-item lines="none">
+            <ion-icon name="cloud-download-outline" slot="start"></ion-icon>
+            <ion-label>Descargar Menú</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-card>
+
+        <ion-grid *ngIf="view">
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <br>
+              <div class="downArrow bounce">
+                <img width="40" height="40" alt=""
+                  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDMyIDMyIiBoZWlnaHQ9IjMycHgiIGlkPSLQodC70L7QuV8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzMiAzMiIgd2lkdGg9IjMycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0yNC4yODUsMTEuMjg0TDE2LDE5LjU3MWwtOC4yODUtOC4yODhjLTAuMzk1LTAuMzk1LTEuMDM0LTAuMzk1LTEuNDI5LDAgIGMtMC4zOTQsMC4zOTUtMC4zOTQsMS4wMzUsMCwxLjQzbDguOTk5LDkuMDAybDAsMGwwLDBjMC4zOTQsMC4zOTUsMS4wMzQsMC4zOTUsMS40MjgsMGw4Ljk5OS05LjAwMiAgYzAuMzk0LTAuMzk1LDAuMzk0LTEuMDM2LDAtMS40MzFDMjUuMzE5LDEwLjg4OSwyNC42NzksMTAuODg5LDI0LjI4NSwxMS4yODR6IiBmaWxsPSIjMTIxMzEzIiBpZD0iRXhwYW5kX01vcmUiLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48L3N2Zz4=" />
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+
+  </div>
+  <hive-pdf-viewer *ngIf="view" src="{{pdfSrc}}"></hive-pdf-viewer>
+
+  <!--
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Haz de cuenta que es un micrositio chulo</ion-card-subtitle>
+      <ion-card-title>COSITO RESTAURANTE 1</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="waiterMode">
+    <ion-card-header>
+      <ion-card-title>MODO MESERO</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="table">
+    <ion-card-header>
+      <ion-card-title>{{table}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row *ngIf="waiterMode">
+      
+      <ion-col>
+        <ion-card class="menu-buttons" (click)="waiterChat()">
+          <ion-item>
+            <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+            <ion-label>Hablar con Clientes</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col>
+        <ion-card class="menu-buttons" routerLink="/chat-index">
+          <ion-item>
+            <ion-icon name="bonfire-outline" slot="start"></ion-icon>
+            <ion-label>Lista de Mesas</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row *ngIf="table || !table && !waiterMode">
+      <ion-col>
+        <ion-card class="menu-buttons" (click)="download()">
+          <ion-item>
+            <ion-icon name="cloud-download-outline" slot="start"></ion-icon>
+            <ion-label>Descargar Menú</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col *ngIf="view === false">
+        <ion-card class="menu-buttons" (click)="presentAlert()">
+          <ion-item>
+            <ion-icon name="eye-outline" slot="start"></ion-icon>
+            <ion-label>Ver Menú</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col *ngIf="view">
+        <ion-card class="menu-buttons" (click)="hideMenu()">
+          <ion-item>
+            <ion-icon name="eye-off-outline" slot="start"></ion-icon>
+            <ion-label>Ocultar Menú</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="table">
+      <ion-col>
+        <ion-card class="menu-buttons" (click)="enterChat()">
+          <ion-item>
+            <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+            <ion-label>Hablar con un Mesero</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid>
+
+  <hive-pdf-viewer *ngIf="view" src="{{pdfSrc}}"></hive-pdf-viewer>
+-->
+</ion-content>

@@ -1,0 +1,185 @@
+.my-message {
+  min-height: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  white-space: pre-wrap;
+  border-radius: .5rem;
+  background: var(--ion-color-tertiary);
+  color: #fff;
+  box-shadow:	0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.my-message::before{
+  // layout
+
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 0.906em solid transparent;
+	border-left-color: var(--ion-color-tertiary);
+	border-right: 0;
+	margin-top: -0.906em;
+	margin-right: -0.80em;
+
+}
+
+.msg-col{
+  padding-right: 1px;
+}
+
+.emoji-col{
+  padding-left: 5px;
+  padding-right: 1px;
+}
+
+.emoji-btn{
+  margin-top: 0;
+  height: 100%;
+  width: 100%;
+  --box-shadow: false;
+}
+
+.btn-col{
+  padding-left: 0px;
+  padding-right: 5px;
+}
+
+.user-badge-self{
+  margin-bottom: -6px;
+  text-align: end;
+  margin-right: 7px;
+}
+
+.user-badge-other{
+  margin-bottom: -6px;
+  margin-left: 7px;
+  text-align: left;
+}
+   
+.other-message {
+  min-height: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  white-space: pre-wrap;
+  border-radius: .5rem;
+  background: var(--ion-color-medium);
+  color: #fff;
+  margin-left: calc(calc(.3 / var(--ion-grid-columns, 12)) * 100%);
+  box-shadow:	0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.other-message::before{
+  // layout
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 0.906em solid transparent;
+	border-right-color: var(--ion-color-medium);
+	border-left: 0;
+	margin-top: -0.906em;
+	margin-left: -0.80em;
+  
+}
+
+.time {
+  color: #dfdfdf;
+  float: right;
+  font-size: small;
+}
+
+.text-area{
+  padding: none;
+}
+
+.message-input {
+  margin-top: 0;
+  border: 2px solid var(--ion-color-tertiary);
+  border-radius: 5px;
+  margin-bottom: 0;
+  background: #fff;
+}
+
+.msg-btn {
+  margin-top: 0;
+  height: 100%;
+  width: 100%;
+  --box-shadow: false;
+}
+
+@media(prefers-color-scheme: dark) {
+  
+  .message-input {
+    background: #4e4e4efd;
+  }
+
+  ion-content{
+    --background: url(../../../assets/bg_dark.png);
+  }
+
+  .other-badge{
+    --color: #fff;
+    --background: var(--ion-color-medium);
+  }
+}
+
+@media(prefers-color-scheme: light) {
+  ion-content{
+    --background: url(../../../assets/bg.png);
+  }
+
+  .other-badge{
+    --color: #fff;
+    --background: var(--ion-color-medium);
+  }
+
+}
+
+ion-toolbar.large-title-fix {
+    //padding-top: env(safe-area-inset-top);
+  --background: rgba(0,0,0,0);
+  --border-color: rgba(0,0,0,0);
+}
+
+
+.wave {
+  position: fixed;
+  bottom: 65px;
+  //margin-top:50vh;
+  //width:100px;
+  //height:100px;
+  margin-left: auto;
+  margin-right: auto;
+  .dot {
+    display:inline-block;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    margin-right:3px;
+    background:var(--ion-color-tertiary);
+    animation: wave 1.3s linear infinite;
+  
+    &:nth-child(2) {
+      animation-delay: -1.1s;
+    }
+  
+    &:nth-child(3) {
+      animation-delay: -0.9s;
+    }
+  }
+}
+  
+@keyframes wave {
+  0%, 60%, 100% {
+    transform: initial;
+  }
+  
+  30% {
+    transform: translateY(-15px);
+  }
+}

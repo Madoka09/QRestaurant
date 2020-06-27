@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+
+      <!--
+      <ion-button>
+        <ion-icon name="notifications-off-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="toggleSound()">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+      -->
+      <ion-button (click)="presentPop($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+  <!--
+  <ion-toolbar>
+    <ion-title *ngIf="typingUserState" size="small">{{typingUser}} está escribiendo...</ion-title>
+  </ion-toolbar>
+  -->
+</ion-header>
+
+<ion-content #content>
+  <ion-grid>
+    <ion-card>
+      <ion-card-content>
+        <ion-text class="ion-text-center">
+          <p>Te uniste al chat como: {{ currentUser.split("-")[1] }}</p>
+          <p>¡No olvides ser respetuoso y educado!</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-row *ngFor="let message of messages">
+
+      <ion-col size="9" *ngIf="message.user !== currentUser" class="user-badge-other">
+        <ion-badge class="other-badge">
+          {{ message.user.split("-")[1] }}
+        </ion-badge>
+      </ion-col>
+
+      <ion-col size="9" *ngIf="message.user !== currentUser" class="other-message">
+        <span>{{ message.msg }}</span>
+        <div class="time ion-text-right"><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+
+      <ion-col *ngIf="message.user === currentUser" class="user-badge-self">
+        <ion-badge color="tertiary">
+          {{ message.user.split("-")[1] }}
+        </ion-badge>
+      </ion-col>
+
+      <ion-col offset="2.7" size="9" *ngIf="message.user === currentUser" class="my-message">
+        <span>{{ message.msg }}</span>
+        <div class="time ion-text-right"><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <ion-toolbar class="large-title-fix"></ion-toolbar>
+  
+  <div class="wave" *ngIf="typingUserState">
+    <ion-chip color="tertiary">
+      <ion-label>
+        {{typingUser.split("-")[1]}}, escribiendo
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </ion-label>
+    </ion-chip>
+  </div>
+  <br>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="2" class="emoji-col">
+        <ion-button class="emoji-btn" (click)="emojiPop($event)" fill="clear" color="tertiary" size="small">
+          <ion-icon name="happy-outline" slot="icon-only" ></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="8" class="msg-col">
+        <ion-textarea placeholder="Escribe tu mensaje..." class="message-input" (ionChange)="typing()" spellcheck
+          auto-grow rows="1" [(ngModel)]="message" (keyup.enter)="sendMessage()" >
+        </ion-textarea>
+      </ion-col>
+
+      <ion-col class="ion-text-center" size="2" class="btn-col">
+        <ion-button fill="solid" color="tertiary" [disabled]="message === ''" class="msg-btn" (click)="sendMessage()">
+          <ion-icon name="send-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,29 @@
+.settingB{
+    height: 115px;
+    width: auto;
+    --border-radius: 10px;
+    --background: #fff
+}
+
+@media(prefers-color-scheme: dark) {
+    .settingB{
+        --background: rgb(31,31,31)
+    }
+}
+
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 30px;
+}
+
+ion-item {
+    --background: rgba(0,0,0,0);
+    --border-color: rgba(0,0,0,0);
+}
+
+ion-col{
+    margin: 0 auto;
+}
