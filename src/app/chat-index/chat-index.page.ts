@@ -122,7 +122,6 @@ export class ChatIndexPage implements OnInit {
     this.socket.fromEvent('roomUsers').subscribe((data: any) => {
 
       this.rooms = data['users'];
-      //console.log(JSON.stringify(this.rooms));
     })
   }
 

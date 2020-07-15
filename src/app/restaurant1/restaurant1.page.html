@@ -10,17 +10,19 @@
     <div class="card-body">
       <div class="user-meta ion-text-center">
         <h3 class="playername">{{restaurant}}</h3>
-        <h5 *ngIf="!table" class="country">
+        <h5 *ngIf="!table && !waiterMode" class="country">
           {{address}}
         </h5>
-        <br *ngIf="!table">
-        <h5 *ngIf="!table" class="country">
+        <br *ngIf="!table && !waiterMode">
+        <h5 *ngIf="!table && !waiterMode" class="country">
           {{schedule}}
         </h5>
-        <h5 *ngIf="!table" class="country">
+        <h5 *ngIf="!table && !waiterMode" class="country">
           {{tel}}
         </h5>
         <h5 class="country" *ngIf="table">¡Bienvenido!</h5>
+        <h5 class="country" *ngIf="waiterMode">¡Bienvenido, {{waiterName}}!</h5>
+
         <!--
         <h6 class="ranking" >
           <ion-chip *ngIf="table" color="success">
@@ -51,7 +53,7 @@
         <ion-card *ngIf="table" (click)="waiterOptions()">
           <ion-item lines="none">
             <ion-icon name="happy-outline" slot="start"></ion-icon>
-            <ion-label>Acciones</ion-label>
+            <ion-label>Inicia Aquí</ion-label>
             <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
           </ion-item>
         </ion-card>

@@ -21,6 +21,7 @@ export class Restaurant1Page implements OnInit {
   table: string;
   waiterMode: string;
   waiter: string;
+  waiterName: string;
   restaurant: string;
   address: string;
   schedule: string;
@@ -121,6 +122,7 @@ export class Restaurant1Page implements OnInit {
           text: 'Entrar',
           handler: data => {
             this.waiter = `${this.restaurant}-${data.waiter}`
+            this.waiterName = data.waiter;
             console.log(`waiter: ${this.waiter}`)
           }
         }
@@ -136,7 +138,10 @@ export class Restaurant1Page implements OnInit {
       subHeader: 'Tendrás que reiniciar la aplicación para poder introducir tu nombre...',
       buttons: [
         {
-          text: 'Adiós'
+          text: 'Adiós',
+          handler: () => {
+            this.modalC.dismiss();
+          }
         },
         {
           text: 'Introducir Nombre',

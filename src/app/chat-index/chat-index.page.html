@@ -1,9 +1,9 @@
-<app-header title="Chat en {{restaurant}}"> </app-header>
+<app-header title="Chat en {{restaurant}} de {{waiter.split('-')[1]}}"> </app-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
     <div *ngFor="let table of rooms; trackBy: values">
-      <ion-item *ngIf="table.username !== waiter" (click)="enterWaiterChat({id:table.id, user: table.username})">
+      <ion-item *ngIf="table.username.split('-')[1].split(' ')[0] === 'Mesa' " (click)="enterWaiterChat({id:table.id, user: table.username})">
         <ion-avatar slot="start">
           <img src="assets/kaede_avatar.jpg">
         </ion-avatar>
