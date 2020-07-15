@@ -12,7 +12,7 @@ export class EmojiComponent implements OnInit {
   constructor(public alertC: AlertController, public popoverC: PopoverController, public modalC: ModalController, private event: Events) { }
 
   ngOnInit() {
-
+    console.log('emoji ev');
   }
 
   addEmoji(ev){
